@@ -8,33 +8,33 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-#include <vector>
-
+template<typename T>
 class Array {
   private:
-    vector<int> _data;
+    T* _data;
+
+    void _refitArray();
 
   public:
+    static final int INIT_CAPACITY = 8;
 
-    Array();
-    ~Array();
-
-    // methods
-    void InsertAt(int index, int value) { _data.insert(index, value); }
-    int RemoveAt(int index) { 
-      int v = _data[index];
-      _data.erase(index);
-      return v;
+    // constructor
+    Array() {
+      _data = new T[INIT_CAPACITY];
     }
 
-    int PopFront() { RemoveAt(0); }
-    int PopBack() { RemoveAt(Size()); }
-    void PushFront(int value) { InsertAt(0, value); }
-    void PushBack(int value) { InsertAt(Size(), value); }
-    int& operator[] (int index) { return _data[index] };
+    // methods
+    void InsertAt(int index, T value);
+    T RemoveAt(int index); 
+    T& operator[] (int index);
+
+    T PopFront() { RemoveAt(0); }
+    T PopBack() { RemoveAt(Size()); }
+    void PushFront(T value) { InsertAt(0, value); }
+    void PushBack(T value) { InsertAt(Size(), value); }
+    T& operator[] (int index) { return _data[index] };
 
     // constant methods
-    int Size() const { return _data.size(); }
+    int Size() const;
 }
-
 #endif

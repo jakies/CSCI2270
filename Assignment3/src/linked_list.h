@@ -13,6 +13,7 @@ struct Node {
   Node* next;
 }
 
+template<typename T>
 class LinkedList {
   private:
     Node* _head;
@@ -23,21 +24,12 @@ class LinkedList {
     }
 
     // methods
-    void InsertAt(int index, int value) { _data.insert(index, value); }
-    int RemoveAt(int index) { 
-      int v = _data[index];
-      _data.erase(index);
-      return v;
-    }
-
-    int PopFront() { RemoveAt(0); }
-    int PopBack() { RemoveAt(Size()); }
-    void PushFront(int value) { InsertAt(0, value); }
-    void PushBack(int value) { InsertAt(Size(), value); }
-    int& operator[] (int index) { return _data[index] };
+    void InsertAt(int index, T value);
+    T RemoveAt(int index);
+    T& operator[] (T index);
 
     // constant methods
-    int Size() const { return _data.size(); }
+    int Size() const;
+    bool IsEmpty() const { return Size == 0 };
 }
-
 #endif

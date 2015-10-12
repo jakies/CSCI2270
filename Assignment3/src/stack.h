@@ -8,24 +8,14 @@
 #ifndef STACK_H
 #define STACK_H
 
-class Stack {
-  private:
-    int _used;
+#include "adt.h"
 
+template<typename T>
+class Stack: public ADT {
   public:
-    // constructor
-    Stack() {
-      _used = 0;
-    }
-
     // methods
-    void Push(const int& value);
-    int Pop();
-
-    // constant methods
-    bool IsEmpty() const { return _used == 0; }
-    int Size() const { return _used; }
-    int Top() const;
+    void Push(const T& value);
+    T Pop();
 }
 
 #endif
