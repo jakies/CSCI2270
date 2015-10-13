@@ -5,36 +5,31 @@
  *
  * Defines the interface for an Array.
  */
-#ifndef ARRAY_H
-#define ARRAY_H
+#ifndef CSCI2270_ASSIGNMENT3_ARRAY_H
+#define CSCI2270_ASSIGNMENT3_ARRAY_H
 
 template<typename T>
 class Array {
   private:
     T* _data;
 
-    void _refitArray();
-
   public:
-    static final int INIT_CAPACITY = 8;
-
-    // constructor
     Array() {
-      _data = new T[INIT_CAPACITY];
+      _data = new T[0];
     }
 
     // methods
     void InsertAt(int index, T value);
-    T RemoveAt(int index); 
+    T RemoveAt(int index);
     T& operator[] (int index);
 
-    T PopFront() { RemoveAt(0); }
-    T PopBack() { RemoveAt(Size()); }
     void PushFront(T value) { InsertAt(0, value); }
     void PushBack(T value) { InsertAt(Size(), value); }
-    T& operator[] (int index) { return _data[index] };
+    T PopFront() { return RemoveAt(0); }
+    T PopBack() { return RemoveAt(Size()); }
 
     // constant methods
     int Size() const;
-}
+};
+
 #endif

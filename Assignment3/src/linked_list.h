@@ -5,18 +5,19 @@
  *
  * Defines the interface for a Linked List.
  */
-#ifndef LLIST_H
-#define LLIST_H
+#ifndef CSCI2270_ASSIGNMENT3_LLIST_H
+#define CSCI2270_ASSIGNMENT3_LLIST_H
 
+template<typename T>
 struct Node {
-  int value;
+  T value;
   Node* next;
-}
+};
 
 template<typename T>
 class LinkedList {
   private:
-    Node* _head;
+    Node<T>* _head;
 
   public:
     LinkedList() {
@@ -26,10 +27,15 @@ class LinkedList {
     // methods
     void InsertAt(int index, T value);
     T RemoveAt(int index);
-    T& operator[] (T index);
+    T& operator[] (int index);
+
+    void PushFront(T value) { InsertAt(0, value); }
+    void PushBack(T value) { InsertAt(Size(), value); }
+    T PopFront() { return RemoveAt(0); }
+    T PopBack() { return RemoveAt(Size()); }
 
     // constant methods
     int Size() const;
-    bool IsEmpty() const { return Size == 0 };
-}
+};
+
 #endif

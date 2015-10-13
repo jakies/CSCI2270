@@ -5,13 +5,13 @@
  *
  * Defines the interface for a Stack.
  */
-#ifndef STACK_H
-#define STACK_H
+#ifndef CSCI2270_ASSIGNMENT3_STACK_H
+#define CSCI2270_ASSIGNMENT3_STACK_H
 
-#include "adt.h"
+#include "structure.h"
 
 template<typename T>
-class Stack: public ADT {
+class Stack: public Structure {
   public:
     // methods
     void Push(const T& value);
