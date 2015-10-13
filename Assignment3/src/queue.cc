@@ -36,49 +36,8 @@ void Queue<T, I>::Print() const {
   printf("\n");
   printf("  vv QUEUE FRONT vv\n");
   for(int i = 0; i < _imp.Size(); ++i) {
-    printf("   [ %11s ]\n", _imp[i]);
+    T v = _imp[i];
+    printf("   [ %11s ]\n", v);
   }
   printf("\n");
-}
-
-template<typename T, typename I>
-void Queue<T, I>::Prompt() {
-  while(true) {
-    printf("\n");
-    printf("  Please choose an operation:\n");
-    printf("    1) ENQUEUE\n");
-    printf("    2) DEQUEUE\n");
-    printf("    3) PRINT\n");
-    printf("    4) IS PALINDROME?\n");
-    printf("    5) EXIT\n");
-    printf("\n");
-    printf("  > ");
-
-    switch(getchar()-48) {
-      case 1: 
-        printf("  Give me a value > ");
-        T val;
-        getline(std::cin, val);
-        (*this)->Enqueue(val);
-        break;
-
-      case 2: 
-        printf("  You just removed: %s\n", (*this)->Dequeue());
-        break;
-
-      case 3: 
-        (*this)->Print();
-        break;
-
-      case 4:
-        (*this)->IsPalindrome();
-        break;
-
-      case 5:
-        exit(0);
-
-      default:
-        printf("  That is not an option.\n");
-    }
-  }
 }

@@ -19,7 +19,6 @@ class Queue {
     }
 
     // methods
-    void Prompt();
     void Enqueue(const T& value);
     T Dequeue();
 

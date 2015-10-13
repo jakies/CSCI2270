@@ -27,7 +27,6 @@ class LinkedList {
     // methods
     void InsertAt(int index, T value);
     T RemoveAt(int index);
-    T& operator[] (int index);
 
     void PushFront(T value) { InsertAt(0, value); }
     void PushBack(T value) { InsertAt(Size(), value); }
@@ -35,6 +34,7 @@ class LinkedList {
     T PopBack() { return RemoveAt(Size()); }
 
     // constant methods
+    T& operator[] (int index) const;
     int Size() const;
 };
 

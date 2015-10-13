@@ -7,16 +7,26 @@
  * Build with the `start.sh` script from the parent directory.
  */
 
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+#include <stdlib.h>
 #include <stdio.h>
 #include "stack.cc"
 #include "queue.cc"
 #include "array.cc"
 #include "linked_list.cc"
 
-Stack<int, LinkedList<int> > * makeStackLL();
-Stack<int, Array<int> > * makeStackArray();
-Queue<int, LinkedList<int> > * makeQueueLL();
-Queue<int, Array<int> > * makeQueueArray();
+void startStackLL();
+void startStackArray();
+void startQueueLL();
+void startQueueArray();
+
+template<typename I>
+void queuePrompt(Queue<int, I>* myQueue);
+
+template<typename I>
+void stackPrompt(Stack<int, I>* myStack);
 
 int strucSelect();
 int implemenSelect();
@@ -26,10 +36,10 @@ int main() {
   int second = implemenSelect(); 
 
   switch(first+second) {
-    case  5: makeStackArray()->Prompt();
-    case  9: makeStackLL()->Prompt();
-    case  6: makeQueueArray()->Prompt();
-    case 10: makeQueueLL()->Prompt();
+    case  5: startStackArray(); 
+    case  9: startStackLL();
+    case  6: startQueueArray(); 
+    case 10: startQueueLL();
   }
 
   return 0;
@@ -69,24 +79,110 @@ int implemenSelect() {
   }
 }
 
-Stack<int, LinkedList<int> > * makeStackLL() {
-  LinkedList<int> a;
-  return new Stack<int, LinkedList<int> >(a);
+void startStackLL() {
+  stackPrompt(new Stack<int, LinkedList<int> >(LinkedList<int>()));
 }
 
-Stack<int, Array<int> > * makeStackArray() {
-  Array<int> a;
-  return new Stack<int, Array<int> >(a);
+void startStackArray() {
+  stackPrompt(new Stack<int, Array<int> >(Array<int>())); 
 }
 
-Queue<int, LinkedList<int> > * makeQueueLL() {
-  LinkedList<int> a;
-  return new Queue<int, LinkedList<int> >(a);
-
+void startQueueLL() {
+  queuePrompt(new Queue<int, LinkedList<int> >(LinkedList<int>()));
 }
 
-Queue<int, Array<int> > * makeQueueArray() {
-  Array<int> a;
-  return new Queue<int, Array<int> >(a);
+void startQueueArray() {
+  queuePrompt(new Queue<int, Array<int> >(Array<int>()));
+}
+  
+template<typename I>
+void queuePrompt(Queue<int, I>* myQueue) {
+  std::string val;
+
+  while(true) {
+    printf("\n");
+    printf("  Please choose an operation:\n");
+    printf("    1) ENQUEUE\n");
+    printf("    2) DEQUEUE\n");
+    printf("    3) PRINT\n");
+    printf("    4) IS PALINDROME?\n");
+    printf("    5) EXIT\n");
+    printf("\n");
+    printf("  > ");
+
+    switch(getchar()-48) {
+      case 1: 
+        {
+          printf("  Give me a value > ");
+          getline(std::cin, val);
+          const int v = atoi(val.c_str());
+          myQueue->Enqueue(v);
+        }
+        break;
+
+      case 2: 
+        printf("  You just removed: %s\n", myQueue->Dequeue());
+        break;
+
+      case 3: 
+        myQueue->Print();
+        break;
+
+      case 4:
+        myQueue->IsPalindrome();
+        break;
+
+      case 5:
+        exit(0);
+
+      default:
+        printf("  That is not an option.\n");
+    }
+  }
 }
 
+template<typename I>
+void stackPrompt(Stack<int, I>* myStack) {
+  std::string val;
+
+  while(true) {
+    printf("\n");
+    printf("  Please choose an operation:\n");
+    printf("    1) PUSH\n");
+    printf("    2) POP\n");
+    printf("    3) PRINT\n");
+    printf("    4) IS PALINDROME?\n");
+    printf("    5) EXIT\n");
+    printf("\n");
+    printf("  > ");
+
+    switch(getchar()-48) {
+      case 1: 
+        {
+          printf("  Give me a value > ");
+          getline(std::cin, val);
+          const int v = atoi(val.c_str());
+          myStack->Push(v);
+        }
+        break;
+
+      case 2: 
+        printf("  You just removed: %d\n", myStack->Pop());
+        break;
+
+      case 3: 
+        myStack->Print();
+        break;
+
+      case 4:
+        myStack->IsPalindrome();
+        break;
+
+      case 5:
+        exit(0);
+
+      default:
+        printf("  That is not an option.\n");
+    }
+  }
+}

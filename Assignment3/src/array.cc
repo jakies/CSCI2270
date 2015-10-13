@@ -6,6 +6,7 @@
  * Implementation for an Array.
  */
 
+#include <stdlib.h>
 #include "array.h"
 
 template<typename T>
@@ -48,6 +49,6 @@ T Array<T>::RemoveAt(int index) {
 }
 
 template<typename T>
-T& Array<T>::operator [](int index) {
+T& Array<T>::operator[] (int index) const {
   return _data[index];
 }

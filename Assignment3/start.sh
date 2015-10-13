@@ -8,5 +8,5 @@
 #
 # ./start.sh
 
-clang++ src/main.cc -o build -fpermissive -std=c++11 && ./build;
+clang++ src/main.cc -o build -fpermissive -Wformat -std=c++11 && ./build;
 rm build;

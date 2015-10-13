@@ -32,17 +32,17 @@ T LinkedList<T>::RemoveAt(int index) {
   Node<T> *c = _head, *t;
   if(index == 0) {
 	  t = _head, _head = _head->next;
-    return t;
+    return t->value;
   }
   for(int i = 0; i < index-1; ++i, c = c->next);
   t = c->next; 
   c->next= t->next;
-  return t;
+  return t->value;
 }
 
 template<typename T>
-T& LinkedList<T>::operator [](int index) {
+T& LinkedList<T>::operator[] (int index) const {
 	Node<T> *c = _head;
-	for(int i = 0; i < index; i++, c = c->next_node);
+	for(int i = 0; i < index; i++, c = c->next);
 	return c->value;
 }
