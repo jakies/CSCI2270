@@ -8,14 +8,22 @@
 #ifndef CSCI2270_ASSIGNMENT3_QUEUE_H
 #define CSCI2270_ASSIGNMENT3_QUEUE_H
 
-#include "structure.h"
+template<typename T, typename I>
+class Queue {
+  private:
+    I _imp;
 
-template<typename T>
-class Queue: public Structure {
   public:
+    Queue(I imp) {
+      _imp = imp;
+    }
+
     // methods
     void Enqueue(const T& value);
     T Dequeue();
-}
 
+    // constant methods
+    bool IsPalindrome() const;
+    void Print() const;
+};
 #endif

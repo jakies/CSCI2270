@@ -1,26 +1,26 @@
 /**
  * Jacob Selig (jacob.selig@colorado.edu)
  * TA - Guohui Ding
- * File - src/stack.cc
+ * File - src/queue.cc
  *
- * Implementation for a Stack.
+ * Implementation for a Queue.
  */
 
 #include <stdio.h>
-#include "stack.h"
+#include "queue.h"
 
 template<typename T, typename I>
-void Stack<T, I>::Push(const T& value) {
-  _imp.PushFront(value);
+void Queue<T, I>::Enqueue(const T& value) {
+  _imp.PushBack(value);
 }
 
 template<typename T, typename I>
-T Stack<T, I>::Pop() {
+T Queue<T, I>::Dequeue() {
   _imp.PopFront();
 }
 
 template<typename T, typename I>
-bool Stack<T, I>::IsPalindrome() const {
+bool Queue<T, I>::IsPalindrome() const {
   int len = _imp.Size()/2;
   for(int i = 0; i < len; ++i) {
     if(_imp[i] != _imp[len - i]) {
@@ -32,11 +32,11 @@ bool Stack<T, I>::IsPalindrome() const {
 }
 
 template<typename T, typename I>
-void Stack<T, I>::Print() const {
+void Queue<T, I>::Print() const {
   printf("\n");
-  printf("  vv STACK TOP vv\n");
+  printf("  vv QUEUE FRONT vv\n");
   for(int i = 0; i < _imp.Size(); ++i) {
-    printf("   [ %9s ]\n", _imp[i]);
+    printf("   [ %11s ]\n", _imp[i]);
   }
   printf("\n");
 }
