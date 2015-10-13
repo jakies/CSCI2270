@@ -19,6 +19,8 @@ class Array {
     }
 
     // methods
+    void Prompt();
+
     void InsertAt(int index, T value);
     T RemoveAt(int index);
     T& operator[] (int index);

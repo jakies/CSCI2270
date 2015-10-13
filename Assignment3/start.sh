@@ -8,5 +8,5 @@
 #
 # ./start.sh
 
-clang src/main.cc -o build -lncurses && ./build;
+clang++ src/main.cc -o build -fpermissive -std=c++11 && ./build;
 rm build;

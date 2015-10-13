@@ -18,18 +18,13 @@ int LinkedList<T>::Size() const {
 template<typename T>
 void LinkedList<T>::InsertAt(int index, T value) {
   Node<T> *c = _head, *n = new Node<T>{value, nullptr}, *t;
-  if(index < 0 || index > Size()) {
-	  return false;
-  }
   if(!_head || !index) {
 	  n->next = _head;
 	  _head = n;
-	  return true;
   }
   for(int i = 0; i < index-1; ++i, c = c->next);
   t = c->next, c->next= n; 
   n->next = t;
-  return true;
 }
 
 template<typename T>

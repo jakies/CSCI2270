@@ -19,6 +19,7 @@ class Stack {
     }
 
     // methods
+    void Prompt();
     void Push(const T& value);
     T Pop();
 
