@@ -6,6 +6,8 @@
  * Implementation for a Stack.
  */
 
+#include <iostream>
+#include <iomanip>
 #include <stdio.h>
 #include "stack.h"
 
@@ -16,14 +18,15 @@ void Stack<T, I>::Push(const T& value) {
 
 template<typename T, typename I>
 T Stack<T, I>::Pop() {
-  _imp.PopFront();
+  return _imp.PopFront();
 }
 
 template<typename T, typename I>
 bool Stack<T, I>::IsPalindrome() const {
-  int len = _imp.Size()/2;
-  for(int i = 0; i < len; ++i) {
-    if(_imp[i] != _imp[len - i]) {
+  int len = _imp.Size();
+
+  for(auto a = 0, z = len; a <= z; ++a, --z) {
+    if(_imp[a] != _imp[z]) {
       return false;
     }
   }
@@ -33,10 +36,18 @@ bool Stack<T, I>::IsPalindrome() const {
 
 template<typename T, typename I>
 void Stack<T, I>::Print() const {
-  printf("\n");
-  printf("  vv STACK TOP vv\n");
-  for(int i = 0; i < _imp.Size(); ++i) {
-    printf("   [ %9s ]\n", _imp[i]);
+  using std::cout;
+  using std::endl;
+  using std::setw;
+  char t = '\t';
+
+  cout << endl;
+  cout << t << " vv STACK TOP vv " << endl;
+
+  for(auto i = 0u; i < _imp.Size(); ++i) {
+    const T val = _imp[i];
+    cout << t << " [  " << setw(9) << val << "  ] " << endl;
   }
-  printf("\n");
+
+  cout << endl;
 }

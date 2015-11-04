@@ -6,46 +6,27 @@
  * Implementation for an Array.
  */
 
+#include <iostream>
+#include <iomanip>
 #include <stdlib.h>
 #include "array.h"
 
 template<typename T>
 int Array<T>::Size() const {
-  int c = 0;
-  while(_data[c]) ++c;
-  return c;
+  return _data.size();
 }
 
 template<typename T>
 void Array<T>::InsertAt(int index, T value) {
-  const int size = Size();
-  T* tmp = new T[size + 1];
-
-  for(int i = 0; i <= size; ++i) {
-    tmp[i] = (i < index) ? (i > index) 
-      ? _data[i] 
-      : value 
-      : _data[i - 1];
-  }
-
-  _data = tmp;
+  _data.insert(_data.begin()+index, value);
 }
 
 template<typename T>
 T Array<T>::RemoveAt(int index) {
-  const int size = Size();
-  T* tmp = new T[size - 1];
-  T removed;
+  const T value = _data[index];
+  _data.erase(_data.begin()+index);
 
-  for(int i = 0; i < (size - 1); ++i) {
-    if(i == index) removed = tmp[i];
-
-    tmp[i] = (i < index) ? _data[i] : _data[i + 1];
-  }
-
-  _data = tmp;
-
-  return removed;
+  return value;
 }
 
 template<typename T>

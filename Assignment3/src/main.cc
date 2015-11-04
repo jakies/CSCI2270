@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "stack.cc"
 #include "queue.cc"
-#include "array.cc"
+//#include "array.cc"
 #include "linked_list.cc"
 
 void startStackLL();
@@ -46,35 +46,53 @@ int main() {
 }
 
 int strucSelect() {
-  printf("\n");
-  printf("  Please choose a structure:\n");
-  printf("    1) Create Stack\n");
-  printf("    2) Create Queue\n");
-  printf("    3) Exit\n");
-  printf("\n");
-  printf("  > ");
+  using std::cout;
+  using std::cin;
+  using std::endl;
+  int selection;
 
-  while(true) {
-    switch(getchar()-48) {
-      case 1: return 1;
-      case 2: return 2;
-      case 3: exit(0);
+  cout << endl;
+  cout << "  Please choose a structure:" << endl;
+  cout << "    1) Create Stack" << endl;
+  cout << "    2) Create Queue" << endl;
+  cout << "    3) Exit" << endl;
+  cout << endl;
+  cout << "  > ";
+  cin >> selection;
+
+  switch(selection) {
+    case 1: return 1;
+    case 2: return 2;
+    case 3: exit(0);
+    default: 
+    {
+      cout << "  That is not an option." << endl;
+      return strucSelect();
     }
   }
 }
 
 int implemenSelect() {
-  printf("\n");
-  printf("  Please choose an implementation:\n");
-  printf("    1) Array\n");
-  printf("    2) Linked List\n");
-  printf("\n");
-  printf("  > ");
+  using std::cout;
+  using std::cin;
+  using std::endl;
+  int selection;
 
-  while(true) {
-    switch(getchar()-48) {
-      case 1: return 4;
-      case 2: return 8;
+  cout << endl;
+  cout << "  Please choose an implementation:" << endl;
+  cout << "    1) Array" << endl;
+  cout << "    2) Linked List" << endl;
+  cout << endl;
+  cout << "  > ";
+  cin >> selection;
+
+  switch(selection) {
+    case 1: return 4;
+    case 2: return 8;
+    default: 
+    {
+      cout << "  That is not an option." << endl;
+      return implemenSelect();
     }
   }
 }
@@ -84,7 +102,7 @@ void startStackLL() {
 }
 
 void startStackArray() {
-  stackPrompt(new Stack<int, Array<int> >(Array<int>())); 
+  //stackPrompt(new Stack<int, Array<int> >(Array<int>())); 
 }
 
 void startQueueLL() {
@@ -92,36 +110,38 @@ void startQueueLL() {
 }
 
 void startQueueArray() {
-  queuePrompt(new Queue<int, Array<int> >(Array<int>()));
+  //queuePrompt(new Queue<int, Array<int> >(Array<int>()));
 }
   
 template<typename I>
 void queuePrompt(Queue<int, I>* myQueue) {
+  using std::cout; 
+  using std::cin;
+  using std::endl;
+  int inp, v;
   std::string val;
 
   while(true) {
-    printf("\n");
-    printf("  Please choose an operation:\n");
-    printf("    1) ENQUEUE\n");
-    printf("    2) DEQUEUE\n");
-    printf("    3) PRINT\n");
-    printf("    4) IS PALINDROME?\n");
-    printf("    5) EXIT\n");
-    printf("\n");
-    printf("  > ");
+    cout << endl;
+    cout << "  Please choose an operation:" << endl;
+    cout << "    1) ENQUEUE" << endl;
+    cout << "    2) DEQUEUE" << endl;
+    cout << "    3) PRINT" << endl;
+    cout << "    4) IS PALINDROME?" << endl;
+    cout << "    5) EXIT" << endl;
+    cout << endl;
+    cout << "  > ";
+    cin >> inp;
 
-    switch(getchar()-48) {
+    switch(inp) {
       case 1: 
-        {
-          printf("  Give me a value > ");
-          getline(std::cin, val);
-          const int v = atoi(val.c_str());
-          myQueue->Enqueue(v);
-        }
+        cout << "  Give me a value > "; 
+        cin >> v;
+        myQueue->Enqueue(v);
         break;
 
       case 2: 
-        printf("  You just removed: %s\n", myQueue->Dequeue());
+        cout << "  You just removed: " << myQueue->Dequeue() << endl;
         break;
 
       case 3: 
@@ -129,45 +149,47 @@ void queuePrompt(Queue<int, I>* myQueue) {
         break;
 
       case 4:
-        myQueue->IsPalindrome();
+        cout << "  This " << (myQueue->IsPalindrome() ? "IS" : "ISNT") << " a palindrome." << endl;
         break;
 
       case 5:
         exit(0);
 
       default:
-        printf("  That is not an option.\n");
+        cout << "  That is not an option.";
     }
   }
 }
 
 template<typename I>
 void stackPrompt(Stack<int, I>* myStack) {
+  using std::cout;
+  using std::cin;
+  using std::endl;
+  int inp, v;
   std::string val;
 
   while(true) {
-    printf("\n");
-    printf("  Please choose an operation:\n");
-    printf("    1) PUSH\n");
-    printf("    2) POP\n");
-    printf("    3) PRINT\n");
-    printf("    4) IS PALINDROME?\n");
-    printf("    5) EXIT\n");
-    printf("\n");
-    printf("  > ");
+    cout << endl;
+    cout << "  Please choose an operation:" << endl;
+    cout << "    1) PUSH" << endl;
+    cout << "    2) POP" << endl;
+    cout << "    3) PRINT" << endl;
+    cout << "    4) IS PALINDROME?" << endl;
+    cout << "    5) EXIT" << endl;
+    cout << endl;
+    cout << "  > ";
+    cin >> inp;
 
-    switch(getchar()-48) {
+    switch(inp) {
       case 1: 
-        {
-          printf("  Give me a value > ");
-          getline(std::cin, val);
-          const int v = atoi(val.c_str());
-          myStack->Push(v);
-        }
+        cout << "  Give me a value > ";
+        cin >> v;
+        myStack->Push(v);
         break;
 
       case 2: 
-        printf("  You just removed: %d\n", myStack->Pop());
+        cout << "  You just removed: " << myStack->Pop() << endl;
         break;
 
       case 3: 
@@ -175,14 +197,14 @@ void stackPrompt(Stack<int, I>* myStack) {
         break;
 
       case 4:
-        myStack->IsPalindrome();
+        cout << "  This " << (myStack->IsPalindrome() ? "IS" : "ISNT") << " a palindrome." << endl;
         break;
 
       case 5:
         exit(0);
 
       default:
-        printf("  That is not an option.\n");
+        cout << "  That is not an option." << endl;
     }
   }
 }

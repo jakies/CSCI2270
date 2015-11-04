@@ -6,6 +6,8 @@
  * Implementation for a Queue.
  */
 
+#include <iostream>
+#include <iomanip>
 #include <stdio.h>
 #include "queue.h"
 
@@ -16,14 +18,15 @@ void Queue<T, I>::Enqueue(const T& value) {
 
 template<typename T, typename I>
 T Queue<T, I>::Dequeue() {
-  _imp.PopFront();
+  return _imp.PopFront();
 }
 
 template<typename T, typename I>
 bool Queue<T, I>::IsPalindrome() const {
-  int len = _imp.Size()/2;
-  for(int i = 0; i < len; ++i) {
-    if(_imp[i] != _imp[len - i]) {
+  int len = _imp.Size();
+
+  for(auto a = 0, z = len; a <= z; ++a, --z) {
+    if(_imp[a] != _imp[z]) {
       return false;
     }
   }
@@ -33,11 +36,17 @@ bool Queue<T, I>::IsPalindrome() const {
 
 template<typename T, typename I>
 void Queue<T, I>::Print() const {
-  printf("\n");
-  printf("  vv QUEUE FRONT vv\n");
-  for(int i = 0; i < _imp.Size(); ++i) {
-    T v = _imp[i];
-    printf("   [ %11s ]\n", v);
+  using std::cout;
+  using std::endl;
+  using std::setw;
+  char t = '\t';
+
+  cout << endl;
+  cout << t << " vQUEUE FRONTv " << endl;
+
+  for(auto i = 0u; i < _imp.Size(); ++i) {
+    cout << t << " [  " << setw(9) << _imp[i] << "  ] " << endl;
   }
-  printf("\n");
+
+  cout << endl;
 }

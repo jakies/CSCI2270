@@ -10,7 +10,7 @@
 
 template<typename T>
 int LinkedList<T>::Size() const {
-  int c = 0;
+  auto c = 0u;
   for(Node<T> *t = _head; t; t = t->next, ++c);
   return c;
 }
@@ -21,8 +21,9 @@ void LinkedList<T>::InsertAt(int index, T value) {
   if(!_head || !index) {
 	  n->next = _head;
 	  _head = n;
+    return;
   }
-  for(int i = 0; i < index-1; ++i, c = c->next);
+  for(auto i = 0u; i < index-1; ++i, c = c->next);
   t = c->next, c->next= n; 
   n->next = t;
 }
@@ -34,15 +35,15 @@ T LinkedList<T>::RemoveAt(int index) {
 	  t = _head, _head = _head->next;
     return t->value;
   }
-  for(int i = 0; i < index-1; ++i, c = c->next);
+  for(auto i = 0u; i < index-1; ++i, c = c->next);
   t = c->next; 
-  c->next= t->next;
+  c->next = t->next;
   return t->value;
 }
 
 template<typename T>
 T& LinkedList<T>::operator[] (int index) const {
 	Node<T> *c = _head;
-	for(int i = 0; i < index; i++, c = c->next);
+	for(auto i = 0u; i < index; i++, c = c->next);
 	return c->value;
 }

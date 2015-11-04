@@ -8,15 +8,14 @@
 #ifndef CSCI2270_ASSIGNMENT3_ARRAY_H
 #define CSCI2270_ASSIGNMENT3_ARRAY_H
 
+#include <vector>
+
 template<typename T>
 class Array {
   private:
-    T* _data;
+    std::vector<T> _data;
 
   public:
-    Array() {
-      _data = new T[0];
-    }
 
     // methods
     void Prompt();
