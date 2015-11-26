@@ -81,6 +81,7 @@ int SizeRecursive(const BinaryTreeNode* tree_node) {
 // head node in the tree.
 bool ContainsRecursive(const BinaryTreeNode* tree_node, int value) {
   if(!tree_node) return false;
+
   return (tree_node->data == value)
       || ContainsRecursive(tree_node->right_child, value)
       || ContainsRecursive(tree_node->left_child, value);
@@ -113,13 +114,13 @@ bool InsertRecursive(BinaryTreeNode* &tree_node, int value) {
 // a buddy is. It would also set the pointer to the buddy node in the parent to
 // nullptr. That's why the node is passed in as a reference to a pointer to a
 // BinaryTreeNode (so it can be nulled)
-BinaryTreeNode* GetBuddyAndNullParentPtr(BinaryTreeNode*& node) {
+BinaryTreeNode* GetBuddyNullParent(BinaryTreeNode*& node) {
   if(!node) {
     return nullptr;
   } else if(node->right_child) {
-    return GetBuddyAndNullParentPtr(node->right_child);
+    return GetBuddyNullParent(node->right_child);
   } else {
-    BinaryTreeNode* b = node;
+    auto b = node;
     node = node->left_child;
     return b;
   }
@@ -137,23 +138,16 @@ bool RemoveRecursive(BinaryTreeNode*& tree_node, int value) {
   if(!tree_node) return false;
 
   auto data = tree_node->data;
-  if(data > value) return RemoveRecursive(tree_node->left_child, value);
-  if(data < value) return RemoveRecursive(tree_node->right_child, value);
-
   auto l = tree_node->left_child;
   auto r = tree_node->right_child;
+  auto b = l ? l : r;
 
-  if(l && r) {
-    auto buddy = GetBuddyAndNullParentPtr(l);
-    buddy->left_child = l;
-    buddy->right_child = r;
-    delete tree_node;
-    tree_node = buddy;
-  } else {
-    delete tree_node;
-    tree_node = l ? l : (r ? r : nullptr);
-  }
+  if(data > value) return RemoveRecursive(tree_node->left_child, value);
+  if(data < value) return RemoveRecursive(tree_node->right_child, value);
+  if(l && r) b = GetBuddyNullParent(l), b->left_child = l, b->right_child = r;
 
+  delete tree_node;
+  tree_node = b;
   return true;
 }
 
@@ -195,9 +189,7 @@ std::string ToStringRecursiveDepthFirst(const BinaryTreeNode* tree_node,
 // The constructor for the BinaryTree class. Just like the LinkedList
 // assignment, it should start by setting "head" to nullptr. There are 2 ways to
 // do this in a constructor, you can use either.
-BinaryTree::BinaryTree() {
-  head = nullptr;
-}
+BinaryTree::BinaryTree() { head = nullptr; }
 
 // The Size method for the BinaryTree class. This will have to 'count' how many
 // nodes you have because we don't store that number anywhere. Only a non-null
